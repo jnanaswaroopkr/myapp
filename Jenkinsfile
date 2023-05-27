@@ -3,22 +3,24 @@ pipeline {
     stages {
         stage('my Build') {
             steps {
-                sh 'docker build -t tomcat_build:${BUILD_NUMBER} .' 
+                sh 'git clone "https://github.com/jnanaswaroopkr/myapp.git"'
+                dir('/home/swaroop/myapp') {
+                    sh 'docker build -t tomcat_build:1.0 .' 
+                }
             }
         }  
         stage('publish stage') {
             steps {
-                sh "echo ${BUILD_NUMBER}"
                 sh 'docker login -u jnanaswaroop -p kavyaswaroop'
-                sh 'docker tag tomcat_build:${BUILD_NUMBER} jnanaswaroop/jnanaswarooptomcat:${BUILD_NUMBER}'
-                sh 'docker push jnanaswaroop/jnanaswarooptomcat:${BUILD_NUMBER}'
+                sh 'docker tag tomcat_build:1.0 jnanaswaroop/tomcat:1.1.6'
+                sh 'docker push jnanaswaroop/tomcat:1.1.6'
             }
         } 
         stage( 'my deploy' ) {
             steps {
-                sh 'docker pull jnanaswaroop/jnanaswarooptomcat:${BUILD_NUMBER}'
+                sh 'docker pull jnanaswaroop/tomcat:1.1.6'
                 sh 'docker rm -f mytomcat'
-                sh 'docker run -d -p 8080:8080 --name mytomcat jnanaswaroop/jnanaswarooptomcat:${BUILD_NUMBER}'
+                sh 'docker run -d -p 8080:9090 --name mytomcat jnanaswaroop/tomcat:1.1.6'
             }
         }    
     } 
