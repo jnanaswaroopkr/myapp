@@ -1,11 +1,12 @@
 pipeline {
-    agent {label 'Deploy'}
+    #agent {label 'Deploy'}
+    agent none
     stages {
         stage('my Build') {
             steps {
                 sh 'rm -rf myapp'
                 sh 'git clone "https://github.com/jnanaswaroopkr/myapp.git"'
-                dir('/home/swaroop/myapp') {
+                dir('/home/ubuntu/myapp') {
                     sh 'docker build -t tomcat_build:1.0 .' 
                 }
             }
