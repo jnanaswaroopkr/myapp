@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sh 'rm -rf myapp'
                 sh 'git clone "https://github.com/jnanaswaroopkr/myapp.git"'
-                sh 'sudo chmod -R 777 myapp'
+                sh 'chmod -R 777 myapp'
                 dir('/home/swaroop/myapp') {
                     sh 'docker build -t tomcat_build:1.0 .' 
                 }
