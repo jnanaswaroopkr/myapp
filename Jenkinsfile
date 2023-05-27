@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sh 'rm -rf myapp'
                 sh 'git clone "https://github.com/jnanaswaroopkr/myapp.git"'
-                dir('/home/ubuntu/myapp') {
+                dir('/home/jnana/myapp') {
                     sh 'docker build -t tomcat_build:1.0 .' 
                 }
             }
