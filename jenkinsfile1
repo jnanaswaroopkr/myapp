@@ -35,7 +35,7 @@ pipeline {
             agent {label 'Deploy'}
             steps {
                 // Run any post-deployment verification tests
-                sh 'curl http://myapp-${BUILD_NUMBER}/health'
+                sh 'curl http://localhost:8080/myapp-${BUILD_NUMBER}'
             }
         }
     }
