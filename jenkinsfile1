@@ -16,8 +16,8 @@ pipeline {
             steps {
                 // Build a Docker image for the application
                 script {
-                    def imageName = "<your-docker-registry>/<your-app-name>:${env.BUILD_NUMBER}"
-                    docker.withRegistry('<your-docker-registry>') {
+                    def imageName = "jnanaswaroop/tomcat:${env.BUILD_NUMBER}"
+                    docker.withRegistry('jnanaswaroop') {
                         sh "docker build -t ${imageName} ."
                         sh "docker push ${imageName}"
                     }
