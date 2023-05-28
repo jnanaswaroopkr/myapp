@@ -24,6 +24,7 @@ pipeline {
         }
 
         stage('Deploy') {
+            agent {label 'Deploy'}
             steps {
                 // Deploy the application to the Kubernetes cluster
                 sh 'kubectl apply -f deployment.yaml'
