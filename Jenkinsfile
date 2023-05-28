@@ -3,11 +3,11 @@ pipeline {
     stages {
         stage('my Build') {
             steps {
-                sh 'rm -rf myapp'
+                #sh 'rm -rf myapp'
                 sh 'git clone "https://github.com/jnanaswaroopkr/myapp.git"'
                 sh 'chmod -R 777 myapp'
                 sh 'pwd'
-                dir('/home/swaroop/myapp') {
+                dir('/home/swaroop/workspace/Demo-project/myapp') {
                     sh 'pwd'
                     sh 'docker build -t tomcat_build:1.0 .' 
                 }
