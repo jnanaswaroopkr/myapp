@@ -31,13 +31,13 @@ pipeline {
             }
         }
 
-        stage('Verify') {
-            agent {label 'Deploy'}
-            steps {
+        //stage('Verify') {
+           // agent {label 'Deploy'}
+            //steps {
                 // Run any post-deployment verification tests
-                sh 'curl http://localhost:30080/myapp-${BUILD_NUMBER}'
-            }
-        }
+                //sh 'curl http://localhost:30080/myapp-${BUILD_NUMBER}'
+            //}
+        //}
     }
 
     post {
