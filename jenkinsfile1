@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                // Checkout source code from version control (e.g., Git)
+                checkout scm
+
+                // Build the application (e.g., Maven, Gradle, or custom build script)
+                sh 'mvn clean package'
+            }
+        }
+
+        
+        stage('Containerize') {
+            steps {
+                // Build a Docker image for the application
+                script {
+                    def imageName = "<your-docker-registry>/<your-app-name>:${env.BUILD_NUMBER}"
+                    docker.withRegistry('<your-docker-registry>') {
+                        sh "docker build -t ${imageName} ."
+                        sh "docker push ${imageName}"
+                    }
+                    // Store the image name in an environment variable for later use
+                    env.IMAGE_NAME = imageName
+                }
+            }
+        }
+
+        stage('Deploy') {
+            environment {
+                // Set up Kubernetes credentials for deployment
+                KUBECONFIG = credentials('your-kubernetes-credentials')
+            }
+            steps {
+                // Deploy the application to the Kubernetes cluster
+                sh 'kubectl apply -f kubernetes/deployment.yaml'
+            }
+        }
+
+        stage('Verify') {
+            steps {
+                // Run any post-deployment verification tests
+                sh 'curl http://<your-app-url>/health'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'CI/CD pipeline succeeded!'
+        }
+        failure {
+            echo 'CI/CD pipeline failed!'
+        }
+    }
+}
