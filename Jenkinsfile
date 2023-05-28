@@ -15,7 +15,8 @@ pipeline {
         }  
         stage('publish stage') {
             steps {
-                sh 'docker login -u jnanaswaroop -p kavyaswaroop'
+                withCredentials([usernamePassword(credentialsId: 'Dockerhub', passwordVariable: 'DockerhubPassword', usernameVariable: 'DockerhubUser')]) {
+                sh "docker login -u ${env.DockerhubUser} -p ${env.DockerhubPassword}"
                 sh 'docker tag tomcat_build:1.0 jnanaswaroop/tomcat:1.1.7'
                 sh 'docker push jnanaswaroop/tomcat:1.1.7'
             }
