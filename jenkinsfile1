@@ -32,9 +32,10 @@ pipeline {
         }
 
         stage('Verify') {
+            agent {label 'Deploy'}
             steps {
                 // Run any post-deployment verification tests
-                sh 'curl http://<your-app-url>/health'
+                sh 'curl http://myapp-${BUILD_NUMBER}/health'
             }
         }
     }
