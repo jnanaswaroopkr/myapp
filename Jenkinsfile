@@ -27,7 +27,7 @@ pipeline {
             steps {
                 sh 'docker pull jnanaswaroop/tomcat:1.1.7'
                 sh 'docker rm -f mytomcat'
-                sh 'docker run -d -p 8080:9090 --name mytomcat jnanaswaroop/tomcat:1.1.7'
+                sh 'docker run -d -p 8010:8080 --name mytomcat jnanaswaroop/tomcat:1.1.7'
             }
         }    
     } 
