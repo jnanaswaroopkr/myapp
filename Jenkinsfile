@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('my Build') {
             steps {
-                #sh 'rm -rf myapp'
+                sh 'rm -rf myapp'
                 sh 'git clone "https://github.com/jnanaswaroopkr/myapp.git"'
                 sh 'chmod -R 777 myapp'
                 sh 'pwd'
