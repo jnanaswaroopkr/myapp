@@ -15,17 +15,17 @@ pipeline {
         stage('Containerize') {
             steps {
                   sh 'docker build -t tomcat_build:${BUILD_NUMBER} .' 
+                  withCredentials([usernamePassword(credentialsId: 'Dockerhub', passwordVariable: 'DockerhubPassword', usernameVariable: 'DockerhubUser')]) {
+                  sh "docker login -u ${env.DockerhubUser} -p ${env.DockerhubPassword}"
+                  sh 'docker tag tomcat_build:1.0 jnanaswaroop/tomcat:${BUILD_NUMBER}'
+                  sh 'docker push jnanaswaroop/tomcat:${BUILD_NUMBER}'
             }
         }
 
         stage('Deploy') {
-            environment {
-                // Set up Kubernetes credentials for deployment
-                KUBECONFIG = credentials('your-kubernetes-credentials')
-            }
             steps {
                 // Deploy the application to the Kubernetes cluster
-                sh 'kubectl apply -f kubernetes/deployment.yaml'
+                sh 'kubectl apply -f deployment.yaml'
             }
         }
 
