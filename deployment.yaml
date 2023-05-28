@@ -28,12 +28,12 @@ kind: Service
 metadata:
   name: my-loadbalancer-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: myapp
   ports:
     - protocol: TCP
       port: 80
       targetPort: 8080
-      nodePort: 30080
+   
       
