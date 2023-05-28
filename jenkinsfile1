@@ -14,16 +14,7 @@ pipeline {
         
         stage('Containerize') {
             steps {
-                // Build a Docker image for the application
-                script {
-                    def imageName = "jnanaswaroop/tomcat:${env.BUILD_NUMBER}"
-                    docker.withRegistry('jnanaswaroop') {
-                        sh "docker build -t ${imageName} ."
-                        sh "docker push ${imageName}"
-                    }
-                    // Store the image name in an environment variable for later use
-                    env.IMAGE_NAME = imageName
-                }
+                  sh 'docker build -t tomcat_build:${BUILD_NUMBER} .' 
             }
         }
 
