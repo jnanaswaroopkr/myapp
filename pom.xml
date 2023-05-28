@@ -5,7 +5,7 @@
 	<artifactId>myapp</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
-	<name>Hello World Web Application Repository</name>
+	<name>Netflix! Web Application</name>
 	<description>Simplest possible Java Webapp</description>
 
 	<build>
