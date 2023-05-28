@@ -4,4 +4,4 @@ COPY . .
 RUN mvn clean package
 
 FROM tomcat:jre8-temurin-focal
-COPY --from=mavenbuilder /var/lib/target/myapp-1.0.war /usr/local/tomcat/webapps/
+COPY --from=mavenbuilder /var/lib/target/myapp-${BUILD_NUMBER}.war /usr/local/tomcat/webapps/
