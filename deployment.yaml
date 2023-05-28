@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: my-container
-        image: jnanaswaroop/tomcat:${BUILD_NUMBER}
+        image: jnanaswaroop/tomcat:latest
 ---
 apiVersion: v1
 kind: Service
