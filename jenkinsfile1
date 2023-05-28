@@ -19,6 +19,7 @@ pipeline {
                   sh "docker login -u ${env.DockerhubUser} -p ${env.DockerhubPassword}"
                   sh 'docker tag tomcat_build:1.0 jnanaswaroop/tomcat:${BUILD_NUMBER}'
                   sh 'docker push jnanaswaroop/tomcat:${BUILD_NUMBER}'
+                  }
             }
         }
 
