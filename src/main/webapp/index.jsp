@@ -9,6 +9,7 @@
 	<h2>3.Horror</h2>
 	<h2>4.Anime</h2>
 	<h2>5.Comedy</h2>
+	<h2>1.Jnana Swaroop</h2>
 	<p>
 		It is now
 		<%= new java.util.Date() %></p>
