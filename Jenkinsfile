@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'Slave1'}
+    agent {label 'Deploy'}
     stages {
         stage('my Build') {
             steps {
@@ -23,6 +23,7 @@ pipeline {
             }
         } 
         stage( 'my deploy' ) {
+            agent {label 'Slave1'}
             steps {
                 sh 'docker pull jnanaswaroop/tomcat:1.1.7'
                 sh 'docker rm -f mytomcat'
